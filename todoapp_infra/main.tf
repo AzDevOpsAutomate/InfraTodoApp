@@ -54,7 +54,7 @@ module "vm_username" {
   depends_on          = [module.key_vault]
   keyvault_name      = "akanshakakeyvault"
   resource_group_name = "rg-todoapp-akanksha"
-  secret_name         = "vm-username"
+  secret_name         = "vm-username-1"
   secret_value        = "akanshavmusername"
 }
 
@@ -63,7 +63,7 @@ module "vm_password" {
   depends_on          = [module.key_vault]
   keyvault_name      = "akanshakakeyvault"
   resource_group_name = "rg-todoapp-akanksha"
-  secret_name         = "vm-password"
+  secret_name         = "vm-password-1"
   secret_value        = "Akansha0015"
 
 }
@@ -88,8 +88,8 @@ module "frontend_vm" {
   vnet_name            = "vnet-todoapp"
   frontend_subnet_name = "frontend-subnet"
   keyvault_name       = "sonakeyvault"
-  username_secret_name = "vm-username"
-  password_secret_name = "vm-password"
+  username_secret_name = "vm-username-1"
+  password_secret_name = "vm-password-1"
 }
 
 # module "public_ip_backend" {
