@@ -1,0 +1,42 @@
+trigger: none
+pool: 'Sona Ka Agent'
+steps:
+
+- task: TerraformInstaller@1
+  displayName: Terraform Install
+  inputs:
+    terraformVersion: 'latest'
+
+- task: TerraformTask@5
+  displayName: Terraform Init
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_infra'
+    backendAzureRmResourceGroupName: 'akansha-rg'
+    backendAzureRmStorageAccountName: 'akanshastorage'
+    backendAzureRmContainerName: 'akanshacontainer'
+    backendAzureRmKey: 'akansha.tfstate'
+
+- task: TerraformTask@5
+  displayName: Terraform Validate
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_infra'
+
+- task: TerraformTask@5
+  displayName: Terraform Plan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_infra'
+    environmentServiceNameAzureRM: 'My First SC'
+
+- task: TerraformTask@5
+  displayName: Terraform Apply
+  inputs:
+    provider: 'azurerm'
+    command: '--auto-approve'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/todoapp_infra'
+    environmentServiceNameAzureRM: 'My First SC'
