@@ -17,7 +17,7 @@ steps:
     backendAzureRmStorageAccountName: 'akanshastorage'
     backendAzureRmContainerName: 'akanshacontainer'
     backendAzureRmKey: 'akansha.tfstate'
-    backendServiceArm: 'My First SC'
+    environmentServiceNameAzureRM: 'My First SC'
 
 - task: TerraformTask@5
   displayName: Terraform Validate
